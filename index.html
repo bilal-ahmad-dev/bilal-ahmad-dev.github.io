@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bilal Ahmad — Data Engineering &amp; Software Development</title>
+<meta name="description" content="Bilal Ahmad — BSIT student, CS instructor, and coder in Lahore, Pakistan, pivoting into data science and data engineering. Portfolio of Python, SQL, and C++ projects.">
+<meta name="keywords" content="Bilal Ahmad, data engineering, data science, Python developer, SQL, Lahore, University of the Punjab, portfolio">
+<meta name="author" content="Bilal Ahmad">
+<meta property="og:title" content="Bilal Ahmad — Data Engineering &amp; Software Development">
+<meta property="og:description" content="BSIT student and coder in Lahore pivoting into data science and data engineering. See projects, skills, and experience.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bilal Ahmad — Data Engineering &amp; Software Development">
+<meta name="twitter:description" content="BSIT student and coder in Lahore pivoting into data science and data engineering.">
+<link rel="canonical" href="https://bilal-ahmad-dev.github.io/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF7;
+    --paper-dim:#F1EFE9;
+    --ink:#1B2430;
+    --ink-soft:#5B6472;
+    --line:#DBDDD6;
+    --blue:#2F5FE0;
+    --amber:#D98E15;
+    --green:#1E8F63;
+    --max:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  @media(max-width:640px){.wrap{padding:0 20px;}}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,250,247,0.86);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .brand{font-size:1.05rem;font-weight:600;}
+  .brand .mono{color:var(--blue);font-size:0.95rem;font-weight:400;}
+  .navlinks{display:flex;gap:28px;font-size:0.94rem;color:var(--ink-soft);}
+  .navlinks a:hover{color:var(--ink);}
+  .navlinks{display:none;}
+  @media(min-width:760px){.navlinks{display:flex;}}
+  .navbtn{
+    font-size:0.85rem;
+    border:1px solid var(--ink);
+    padding:8px 16px;
+    border-radius:2px;
+  }
+  .navbtn:hover{background:var(--ink);color:var(--paper);}
+
+  /* ---------- Hero ---------- */
+  .hero-outer{
+    position:relative;
+  }
+  .hero-outer::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(var(--line) 1px, transparent 1px);
+    background-size:22px 22px;
+    background-position:-4px -4px;
+    -webkit-mask-image:linear-gradient(to bottom, black 55%, transparent 96%);
+    mask-image:linear-gradient(to bottom, black 55%, transparent 96%);
+    pointer-events:none;
+    z-index:0;
+  }
+  .hero{
+    padding:96px 0 72px;
+    display:grid;
+    grid-template-columns:1.15fr 1fr;
+    gap:56px;
+    align-items:center;
+    position:relative;
+    z-index:1;
+  }
+  @media(max-width:900px){.hero{grid-template-columns:1fr;padding:56px 0 40px;}}
+  .kicker{
+    font-size:0.85rem;color:var(--blue);margin-bottom:18px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem,4.4vw,3.4rem);
+    line-height:1.08;
+    max-width:14ch;
+  }
+  .hero p.sub{
+    margin-top:22px;max-width:46ch;color:var(--ink-soft);font-size:1.08rem;
+  }
+  .stat-row{
+    display:flex;gap:34px;margin-top:36px;flex-wrap:wrap;
+  }
+  .stat .num{font-family:'IBM Plex Mono',monospace;font-size:1.5rem;color:var(--ink);}
+  .stat .label{font-size:0.82rem;color:var(--ink-soft);margin-top:2px;}
+  .hero-cta{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--ink);color:var(--paper);padding:13px 24px;
+    border-radius:2px;font-size:0.95rem;font-weight:500;
+  }
+  .btn-primary:hover{background:var(--blue);}
+  .btn-ghost{
+    padding:13px 24px;border:1px solid var(--line);border-radius:2px;
+    font-size:0.95rem;color:var(--ink-soft);
+  }
+  .btn-ghost:hover{border-color:var(--ink);color:var(--ink);}
+
+  /* Pipeline diagram */
+  .pipeline-box{
+    border:1px solid var(--line);
+    background:var(--paper-dim);
+    padding:22px;
+    border-radius:3px;
+  }
+  .code-mock{
+    background:#1B2430;
+    border-radius:3px;
+    overflow:hidden;
+    box-shadow:0 8px 24px -12px rgba(27,36,48,0.35);
+  }
+  .code-titlebar{
+    display:flex;align-items:center;gap:8px;
+    padding:11px 14px;
+    background:#232E3D;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .code-titlebar .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .dot.red{background:#E5645A;}
+  .dot.amber{background:#E8B84B;}
+  .dot.grn{background:#4FC08D;}
+  .code-titlebar .filename{
+    margin-left:8px;font-size:0.76rem;color:#8A93A3;
+  }
+  .code-body{
+    margin:0;padding:20px 18px 22px;
+    font-size:0.86rem;line-height:1.75;
+    color:#DCE1E8;overflow-x:auto;
+  }
+  .code-body .c-kw{color:#6FA8FF;}
+  .code-body .c-fn{color:#F0C868;}
+  .code-body .c-str{color:#7FD9AE;}
+  .code-body .c-op{color:#8A93A3;}
+  .cursor{
+    color:#6FA8FF;
+    animation:blink 1.1s step-end infinite;
+  }
+  @keyframes blink{
+    0%,49%{opacity:1;}
+    50%,100%{opacity:0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cursor{animation:none;}
+  }
+
+  .stage-track{
+    display:flex;align-items:center;gap:0;
+    margin-top:22px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--ink);
+  }
+  .stage{display:flex;align-items:center;gap:8px;white-space:nowrap;}
+  .stage-dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .stage-line{
+    flex:1;height:1px;background:var(--line);margin:0 12px;min-width:16px;
+  }
+  .pipeline-caption{
+    margin-top:16px;font-size:0.78rem;color:var(--ink-soft);
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  /* ---------- Section shell ---------- */
+  section{padding:64px 0;border-top:1px solid var(--line);}
+  .sec-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-bottom:40px;flex-wrap:wrap;gap:10px;
+  }
+  .sec-head h2{font-size:1.7rem;}
+  .sec-num{font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);font-size:0.85rem;}
+  .lede{max-width:62ch;color:var(--ink-soft);}
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  }
+  @media(max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{max-width:58ch;color:var(--ink-soft);}
+  .about-grid p + p{margin-top:16px;}
+  .focus-list{list-style:none;padding:0;margin:0;}
+  .focus-list li{
+    display:flex;justify-content:space-between;
+    padding:12px 0;border-bottom:1px solid var(--line);font-size:0.95rem;
+  }
+  .focus-list li span:last-child{color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;font-size:0.85rem;}
+
+  /* ---------- Experience timeline ---------- */
+  .timeline{position:relative;padding-left:26px;}
+  .timeline::before{
+    content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line);
+  }
+  .tl-item{position:relative;padding-bottom:36px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:"";position:absolute;left:-26px;top:5px;width:9px;height:9px;
+    border-radius:50%;background:var(--blue);border:2px solid var(--paper);
+    box-shadow:0 0 0 1px var(--blue);
+  }
+  .tl-item .role-row{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;
+    margin-bottom:4px;
+  }
+  .tl-item h3{font-size:1.08rem;font-weight:600;}
+  .tl-item .dates{font-family:'IBM Plex Mono',monospace;font-size:0.82rem;color:var(--ink-soft);white-space:nowrap;}
+  .tl-item .org{color:var(--blue);font-size:0.92rem;margin-bottom:8px;}
+  .tl-item ul{margin:8px 0 0;padding-left:18px;color:var(--ink-soft);font-size:0.94rem;}
+  .tl-item ul li{margin-bottom:4px;}
+
+  /* ---------- Projects ---------- */
+  .project{
+    display:grid;grid-template-columns:220px 1fr;gap:36px;
+    padding:34px 0;border-top:1px solid var(--line);
+  }
+  .project:first-child{border-top:none;}
+  @media(max-width:700px){.project{grid-template-columns:1fr;gap:14px;}}
+  .project .ptag{
+    font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--amber);
+  }
+  .project h3{font-size:1.25rem;margin-top:8px;}
+  .project p{color:var(--ink-soft);margin-top:10px;max-width:60ch;}
+  .stack{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+  .stack span{
+    font-family:'IBM Plex Mono',monospace;font-size:0.76rem;color:var(--ink-soft);
+    border-bottom:1px solid var(--line);padding-bottom:2px;
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;
+  }
+  .skill-group h3{
+    display:flex;align-items:center;gap:9px;
+    font-size:0.82rem;color:var(--ink-soft);font-weight:500;
+    font-family:'IBM Plex Mono',monospace;margin-bottom:14px;
+  }
+  .skill-group h3 svg{flex-shrink:0;}
+  .icon-chip{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border:1px solid var(--line);border-radius:2px;
+    background:var(--paper-dim);margin-bottom:14px;
+  }
+  .skill-group ul{list-style:none;padding:0;margin:0;}
+  .skill-group li{
+    padding:8px 0;border-bottom:1px solid var(--line);font-size:0.96rem;
+  }
+
+  /* ---------- Certs / education ---------- */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  @media(max-width:800px){.two-col{grid-template-columns:1fr;}}
+  .cert{
+    display:flex;align-items:flex-start;gap:12px;
+    padding:14px 6px;margin:0 -6px;border-bottom:1px solid var(--line);
+    border-radius:2px;transition:background 0.15s;
+  }
+  .cert svg{flex-shrink:0;margin-top:2px;}
+  .cert:hover{background:var(--paper-dim);}
+  .cert:hover .cname{color:var(--blue);}
+  .cert .cname{font-weight:500;}
+  .cert .cmeta{font-size:0.84rem;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;margin-top:3px;}
+  .edu-item{padding:14px 0;border-bottom:1px solid var(--line);}
+  .edu-item h4{font-size:1rem;font-weight:600;}
+  .edu-item .emeta{font-size:0.84rem;color:var(--ink-soft);margin-top:3px;}
+
+  /* ---------- Contact / footer ---------- */
+  footer{padding:72px 0 48px;border-top:1px solid var(--line);}
+  .contact-head{max-width:56ch;}
+  .contact-head h2{font-size:2rem;}
+  .contact-head p{color:var(--ink-soft);margin-top:14px;}
+  .contact-links{
+    display:flex;gap:32px;margin-top:34px;flex-wrap:wrap;
+  }
+  .contact-links a{
+    font-size:0.98rem;border-bottom:1px solid var(--ink);padding-bottom:3px;
+  }
+  .contact-links a:hover{color:var(--blue);border-color:var(--blue);}
+  .foot-meta{
+    margin-top:56px;padding-top:24px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;color:var(--ink-soft);
+    font-size:0.82rem;font-family:'IBM Plex Mono',monospace;flex-wrap:wrap;gap:8px;
+  }
+  a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">Bilal Ahmad <span class="mono">/ data &amp; software</span></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+    </div>
+    <a class="navbtn" href="#contact">Contact</a>
+  </nav>
+</header>
+
+<div class="hero-outer">
+<section class="hero wrap" style="border-top:none;">
+  <div>
+    <div class="kicker">lahore, pakistan</div>
+    <h1>A coder first, building his way into data.</h1>
+    <p class="sub">I'm a BSIT student at the University of the Punjab with a real passion for writing code — Python, C, C++ — and I'm channeling that into data science and data engineering: pipelines, databases, and dashboards.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="num">3+</div><div class="label">years teaching CS</div></div>
+      <div class="stat"><div class="num">4</div><div class="label">academies instructed at</div></div>
+      <div class="stat"><div class="num">3</div><div class="label">languages: Python, C/C++, SQL</div></div>
+    </div>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#projects">See the work</a>
+      <a class="btn-ghost" href="#contact">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="pipeline-box">
+    <div class="code-mock">
+      <div class="code-titlebar">
+        <span class="dot red"></span><span class="dot amber"></span><span class="dot grn"></span>
+        <span class="filename mono">pipeline.py</span>
+      </div>
+      <pre class="code-body mono"><code><span class="c-kw">def</span> <span class="c-fn">run_pipeline</span>(source):
+    raw   <span class="c-op">=</span> extract(source)
+    clean <span class="c-op">=</span> transform(raw)
+    load(clean, db<span class="c-op">=</span><span class="c-str">"warehouse"</span>)
+    <span class="c-kw">return</span> visualize(clean)<span class="cursor">&#9608;</span>
+</code></pre>
+    </div>
+
+    <div class="stage-track">
+      <div class="stage"><span class="stage-dot" style="background:#2F5FE0"></span>extract</div>
+      <div class="stage-line"></div>
+      <div class="stage"><span class="stage-dot" style="background:#D98E15"></span>clean</div>
+      <div class="stage-line"></div>
+      <div class="stage"><span class="stage-dot" style="background:#1E8F63"></span>load</div>
+      <div class="stage-line"></div>
+      <div class="stage"><span class="stage-dot" style="background:#2F5FE0"></span>visualize</div>
+    </div>
+    <div class="pipeline-caption">// how a dataset moves through my process</div>
+  </div>
+</section>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>About</h2>
+      <span class="sec-num">01</span>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>Coding is where it started and where my real interest still sits — C, C++, and Python, and the satisfaction of getting logic to actually work. I spent the last three years teaching those same fundamentals to secondary school students across Lahore, which forced me to explain systems clearly.</p>
+        <p>Data science and data engineering are where I'm pointing that passion now: building extraction and cleaning scripts, designing relational database schemas, and turning the result into dashboards someone without a technical background can actually read.</p>
+      </div>
+      <ul class="focus-list">
+        <li><span>Core passion</span><span>coding</span></li>
+        <li><span>Growing into</span><span>data engineering</span></li>
+        <li><span>Degree</span><span>BSIT, University of the Punjab</span></li>
+        <li><span>Based in</span><span>Lahore, Pakistan</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Experience</h2>
+      <span class="sec-num">02</span>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="role-row"><h3>Computer Science Instructor</h3><span class="dates">Nov 2024 — Present</span></div>
+        <div class="org">Haris Academy, Salamatpura — Lahore</div>
+        <ul>
+          <li>Deliver advanced CS and programming lectures to 9th, 10th &amp; 11th grade students.</li>
+          <li>Design weekly assessments and practical lab sessions to build coding and algorithmic skills.</li>
+          <li>Mentor students toward board examination results.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="role-row"><h3>Computer Science Instructor</h3><span class="dates">Aug 2024 — Present</span></div>
+        <div class="org">Highfield Academy (Pakistan Mint) — Lahore</div>
+        <ul>
+          <li>Instruct 11th-grade students in foundational IT concepts.</li>
+          <li>Develop lesson plans aligned with the Punjab Board curriculum.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="role-row"><h3>Computer Science Instructor</h3><span class="dates">Aug 2024 — Present</span></div>
+        <div class="org">EFAL Academy (Darogawala Campus) — Lahore</div>
+        <ul>
+          <li>Teach matric-level CS: logic building, computer systems, troubleshooting.</li>
+          <li>Integrate programming practicals to improve engagement and results.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="role-row"><h3>Computer Science Instructor</h3><span class="dates">Jan 2024 — Aug 2024</span></div>
+        <div class="org">Arham's Academy, Salamatpura — Lahore</div>
+        <ul>
+          <li>Managed multi-level classrooms, from pre-9th through 1st year intermediate.</li>
+          <li>Coached students toward strong board exam performance.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Projects</h2>
+      <span class="sec-num">03</span>
+    </div>
+
+    <div class="project">
+      <div>
+        <div class="icon-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D98E15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h6l2 3h10"/><path d="M3 6v10a2 2 0 0 0 2 2h5"/><path d="M13 18h8"/><path d="M18 14l4 4-4 4"/></svg></div>
+        <div class="ptag">data pipeline</div>
+      </div>
+      <div>
+        <h3>Automated Data Pipeline &amp; Extraction Tool</h3>
+        <p>Python scripts that pull raw, unformatted data, clean it, and load it into a SQL database using complex relational queries. Runs on an engineered weekly refresh workflow, so the dataset stays current without manual intervention.</p>
+        <div class="stack"><span>Python</span><span>SQL</span><span>ETL</span><span>Automation</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <div class="icon-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E8F63" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="8" y1="17" x2="8" y2="11"/><line x1="12" y1="17" x2="12" y2="7"/><line x1="16" y1="17" x2="16" y2="13"/></svg></div>
+        <div class="ptag">visualization</div>
+      </div>
+      <div>
+        <h3>Interactive Data Visualization Dashboard</h3>
+        <p>Analyzed public datasets to track KPIs and surface anomalies, then converted the findings into charts and dashboards that turn raw numbers into a statistical story someone can act on.</p>
+        <div class="stack"><span>Python</span><span>Matplotlib</span><span>Seaborn</span><span>Dashboard design</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <div class="icon-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2F5FE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/></svg></div>
+        <div class="ptag">systems</div>
+      </div>
+      <div>
+        <h3>Library Management System</h3>
+        <p>A C++ system with separate admin, teacher, and student login and signup modules, backed by file-based storage for persistent record management.</p>
+        <div class="stack"><span>C++</span><span>Python</span><span>File I/O</span><span>Auth</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Skills</h2>
+      <span class="sec-num">04</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2F5FE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 2 12 8 18"/><polyline points="16 6 22 12 16 18"/></svg> languages</h3>
+        <ul><li>Python</li><li>C++</li><li>C</li><li>SQL (advanced)</li></ul>
+      </div>
+      <div class="skill-group">
+        <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D98E15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg> data &amp; databases</h3>
+        <ul><li>Database management</li><li>Data structures</li><li>Relational databases</li><li>Data pipelines</li></ul>
+      </div>
+      <div class="skill-group">
+        <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E8F63" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="4" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="20" y1="20" x2="20" y2="14"/></svg> visualization</h3>
+        <ul><li>Matplotlib</li><li>Seaborn</li><li>Dashboard design</li></ul>
+      </div>
+      <div class="skill-group">
+        <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2F5FE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="1"/><line x1="3" y1="8" x2="21" y2="8"/></svg> web &amp; tools</h3>
+        <ul><li>HTML5 / CSS3</li><li>MS Office Suite</li><li>Dev-C++</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Education &amp; certifications</h2>
+      <span class="sec-num">05</span>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="edu-item">
+          <h4>BS in Information Technology (BSIT)</h4>
+          <div class="emeta">University of the Punjab, Lahore · Oct 2024 – Expected 2028</div>
+        </div>
+        <div class="edu-item">
+          <h4>Intermediate in Computer Science (ICS)</h4>
+          <div class="emeta">Punjab College, Mughal Pura Campus — Lahore · Graduated April 2024</div>
+        </div>
+        <div class="edu-item">
+          <h4>Matriculation in Computer Science</h4>
+          <div class="emeta">Govt. Boys High School, Salamatpura — Lahore · Graduated February 2022</div>
+        </div>
+      </div>
+      <div>
+        <a class="cert" href="https://coursera.org/verify/NVANF9MMZ8ID" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E8F63" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16 9"/></svg>
+          <div>
+            <div class="cname">Data Analysis &amp; Visualization with Python</div>
+            <div class="cmeta">Microsoft via Coursera · Dec 2025 · ID NVANF9MMZ8ID</div>
+          </div>
+        </a>
+        <a class="cert" href="https://coursera.org/verify/548PSWPJ9NDP" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E8F63" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16 9"/></svg>
+          <div>
+            <div class="cname">Python Programming Fundamentals</div>
+            <div class="cmeta">Microsoft via Coursera · Sep 2025 · ID 548PSWPJ9NDP</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-head">
+      <h2>Let's build something with your data.</h2>
+      <p>Open to data engineering, data analysis, and backend roles — and always happy to talk through a messy dataset or an unstructured database.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:bilalahmmad381@gmail.com">bilalahmmad381@gmail.com</a>
+      <a href="tel:+923234076728">+92 323 4076728</a>
+      <a href="https://github.com/bilal-ahmad-dev" target="_blank" rel="noopener">github.com/bilal-ahmad-dev</a>
+      <span class="mono" style="border:none;color:var(--ink-soft);font-size:0.95rem;">Salamatpura, Lahore, Punjab</span>
+    </div>
+    <div class="foot-meta">
+      <span>Bilal Ahmad</span>
+      <span>built with plain HTML, CSS &amp; JS</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
